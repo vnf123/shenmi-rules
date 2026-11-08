@@ -15,7 +15,7 @@ RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/{BRANCH}"
 TARGET = 70_000          # 每片目标字节数（约 2.3 万汉字，单次抓取安全）
 HEAD_RE = re.compile(r"^第\s*\d+\s*章")
 
-with open(SRC, encoding="utf-8") as f:
+with open(SRC, encoding="utf-8", newline="") as f:
     lines = f.readlines()
 
 # 1. 定位章节起点：只认正文区（跳过目录区）里的真实章标题
@@ -104,8 +104,8 @@ for idx, g in enumerate(groups):
     })
 
 # 4. 校验无损重组
-joined = "".join(open(os.path.join(PARTS_DIR, m["part"]), encoding="utf-8").read() for m in manifest)
-orig = open(SRC, encoding="utf-8").read()
+joined = "".join(open(os.path.join(PARTS_DIR, m["part"]), encoding="utf-8", newline="").read() for m in manifest)
+orig = open(SRC, encoding="utf-8", newline="").read()
 lossless = joined == orig
 
 total_bytes = sum(m["bytes"] for m in manifest)

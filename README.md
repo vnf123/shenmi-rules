@@ -6,7 +6,7 @@
 
 | 用途 | 地址 |
 |---|---|
-| 全文（894 KB，单文件） | https://raw.githubusercontent.com/vnf123/shenmi-rules/main/rules-v3.0.txt |
+| 全文（911,558 bytes / 890 KB，单文件） | https://raw.githubusercontent.com/vnf123/shenmi-rules/main/rules-v3.0.txt |
 | 机器可读清单（分片 / 行号 / 字节 / sha256） | https://raw.githubusercontent.com/vnf123/shenmi-rules/main/manifest.json |
 | 分片索引（Markdown 表格） | https://raw.githubusercontent.com/vnf123/shenmi-rules/main/INDEX.md |
 | 分片目录 | https://raw.githubusercontent.com/vnf123/shenmi-rules/main/parts/part-00.txt … part-13.txt |
@@ -20,7 +20,7 @@
 ## 文件结构
 
 ```
-rules-v3.0.txt      原始全文（UTF-8 / LF / 909,558 bytes / 16,752 行）
+rules-v3.0.txt      原始全文（UTF-8 / 911,558 bytes / 16,751 行，与源文件逐字节一致）
 parts/part-NN.txt   14 个分片，按章边界 + 70KB 上界切分
 manifest.json       分片元数据：章节范围、行号、字节数、sha256、raw 地址
 INDEX.md            人类可读的分片索引
@@ -29,7 +29,7 @@ build.py            可复现的分片构建脚本
 
 ## 完整性
 
-- 编码：UTF-8（无 BOM），换行：LF
+- 编码：UTF-8（无 BOM），换行沿用原文（LF 为主，含少量 CRLF），未做任何归一化
 - 分片按顺序拼接与原文逐字节一致的校验：**PASS**（`manifest.json` 中 `lossless_reassembly_verified: true`）
 - 单片 sha256 见 `manifest.json`，可用于抓取后校验
 
